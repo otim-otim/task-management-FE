@@ -68,7 +68,7 @@ export default function Tasks() {
               </svg>
             </div>
             <h1 className="text-2xl font-bold mb-4">
-              You don't have any tasks yet
+              You don&apos;t have any tasks yet
             </h1>
             <p className="text-gray-500">
               Create tasks and organize your todo items

@@ -16,9 +16,8 @@ export default function TaskItem({
   }) => void;
   handleDeleteTask: (taskId: number) => void;
 }) {
-
   const router = useRouter();
-  
+
   function printTasktitle() {
     if (task.title.length > 100) {
       return task.title.substring(0, 100) + "...";
@@ -59,48 +58,46 @@ export default function TaskItem({
   return (
     <div
       onClick={handleTaskNavigation}
-      className="cursor-pointer w-[736px] h-[72px] pt-4 space-x-3 rounded-tl-lg border-t bg-[#262626] border border-[#333333] shadow-[0_2px_8px_0_#0000000F] flex items-center justify-between px-4"
+      className="cursor-pointer w-full rounded-tl-lg border-t bg-[#262626] border border-[#333333] shadow-[0_2px_8px_0_#0000000F] flex items-center justify-between p-3 sm:p-4 hover:bg-[#2C2C2C] transition-colors duration-300"
     >
-      <label className="flex cursor-pointer items-center gap-4 p-4">
-        <div className="flex items-center">
-          &#8203;
-          <input
-            type="checkbox"
-            className="size-4 rounded-full border-2 border-blue-500 focus:ring-2 focus:ring-blue-300 checked:bg-blue-500"
-            id="Option1"
-            checked={task.completed}
-            onChange={handleTaskCompletion}
-          />
+      <div className="flex items-center w-full space-x-2 sm:space-x-3">
+        <input
+          type="checkbox"
+          checked={task.completed}
+          onChange={handleTaskCompletion}
+          className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-blue-500 focus:ring-2 focus:ring-blue-300 checked:bg-blue-500"
+        />
+        <div className="flex-grow min-w-0">
+          <div className="flex items-center justify-between w-full">
+            <p className="text-xs sm:text-sm text-white truncate">
+              {printTasktitle()}
+            </p>
+            <div className="w-full max-w-[40px] ml-auto">
+              <button
+                onClick={onDeleteTask}
+                className="transition-colors duration-300 p-1 w-full"
+              >
+                <div className="w-4 sm:w-5 ml-auto">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M3 6h18" />
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
-
-        <div>
-          <strong className="font-medium text-sm text-white-900">
-            {printTasktitle()}
-          </strong>
-        </div>
-      </label>
-
-      <div>
-        <button onClick={onDeleteTask}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-trash-2"
-          >
-            <path d="M3 6h18" />
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-            <line x1="10" x2="10" y1="11" y2="17" />
-            <line x1="14" x2="14" y1="11" y2="17" />
-          </svg>
-        </button>
       </div>
     </div>
   );

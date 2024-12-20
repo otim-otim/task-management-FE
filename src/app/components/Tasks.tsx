@@ -79,29 +79,32 @@ export default function Tasks() {
     if (loading) {
       return (
         <div className="flex items-center justify-center h-screen">
-          <h1 className="text-2xl font-bold">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-loader"
-            >
-              <path d="M12 2v4" />
-              <path d="m16.2 7.8 2.9-2.9" />
-              <path d="M18 12h4" />
-              <path d="m16.2 16.2 2.9 2.9" />
-              <path d="M12 18v4" />
-              <path d="m4.9 19.1 2.9-2.9" />
-              <path d="M2 12h4" />
-              <path d="m4.9 4.9 2.9 2.9" />
-            </svg>
-          </h1>
+          <div className="w-full flex flex-col items-center">
+            <h1 className="text-2xl font-bold mb-4">Loading Tasks</h1>
+            <div className="w-8 sm:w-10">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-loader animate-spin"
+              >
+                <path d="M12 2v4" />
+                <path d="m16.2 7.8 2.9-2.9" />
+                <path d="M18 12h4" />
+                <path d="m16.2 16.2 2.9 2.9" />
+                <path d="M12 18v4" />
+                <path d="m4.9 19.1 2.9-2.9" />
+                <path d="M2 12h4" />
+                <path d="m4.9 4.9 2.9 2.9" />
+              </svg>
+            </div>
+          </div>
         </div>
       );
     }
@@ -155,33 +158,55 @@ export default function Tasks() {
     }
   }
 
-  const taskStyle = {
-    width: "736px",
-    height: "358px",
-    top: "291px",
-    left: "352px",
-    gap: "48px",
-    opacity: "0px",
-  };
-
   return (
-    <div className="space-y-2" style={taskStyle}>
-      <div className="flex items-center mb-3 w-full">
-        <div>
-          <span className="text-sm font-bold mr-2">Tasks</span>
-          <span className="whitespace-nowrap rounded-full bg-[#262626] px-2.5 py-0.5 text-sm text-white">
+    <div className="w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-[736px] sm:mx-auto space-y-2 sm:space-y-3 ">
+      <div className="flex items-center justify-between mb-2 sm:mb-3 w-full">
+        <div className="flex items-center space-x-2">
+          <span className="text-xs sm:text-sm font-bold">Tasks</span>
+          <span className="whitespace-nowrap rounded-full bg-[#262626] px-2 py-0.5 text-xs sm:text-sm text-white">
             {tasks.length}
           </span>
         </div>
-        <div className="ml-auto mr-0">
-          <span className="text-sm font-bold mr-2">Completed</span>
-          <span className="whitespace-nowrap rounded-full bg-[#262626] px-2.5 py-0.5 text-sm text-white">
+        <div className="flex items-center space-x-2">
+          <span className="text-xs sm:text-sm font-bold">Completed</span>
+          <span className="whitespace-nowrap rounded-full bg-[#262626] px-2 py-0.5 text-xs sm:text-sm text-white">
             {completedTasks} of {tasks.length}
           </span>
         </div>
       </div>
 
-      {populateTasks()}
+      {loading ? (
+        <div className="flex justify-center items-center py-4 sm:py-6">
+          <svg
+            className="animate-spin h-5 w-5 sm:h-6 sm:w-6 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+        </div>
+      ) : (
+        populateTasks()
+      )}
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500 text-red-500 px-3 py-2 rounded-md text-xs sm:text-sm">
+          {error}
+        </div>
+      )}
     </div>
   );
 }

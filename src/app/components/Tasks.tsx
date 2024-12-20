@@ -116,7 +116,7 @@ export default function Tasks() {
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center">
+      <div className="flex items-center mb-3">
         <div>
           <span className="text-sm font-bold">Tasks</span>
           <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700">

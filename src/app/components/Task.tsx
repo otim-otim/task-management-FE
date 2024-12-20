@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 export default function Task({ task }: { task?: ITask }) {
   const [title, setTitle] = useState<string >(task?.title ?? '');
   const [selectedColor, setSelectedColor] = useState<TaskColor>(task?.color ?? "gray");
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const COLOR_CLASSES: Record<TaskColor, string> = {
     red: "bg-red-500 hover:bg-red-600",
@@ -27,6 +28,10 @@ export default function Task({ task }: { task?: ITask }) {
   async function handleTaskCreateUpdate() {
     if (title) {
       if (task) {
+        if(title === task.title && selectedColor === task.color){
+            setError("No changes made")
+            return
+        }
         const taskUpdateRequest: ITaskUpdateRequest = {
           title,
           color: selectedColor,
@@ -40,6 +45,9 @@ export default function Task({ task }: { task?: ITask }) {
         await createTask(taskCreateRequest);
       }
       router.push("/");
+    }else{
+        setError("add a title to your task")
+        return;
     }
   }
   const renderColorRadioGroup = () => {
@@ -119,6 +127,7 @@ export default function Task({ task }: { task?: ITask }) {
           </svg>
         )}
       </button>
+      {error && (<p className="text-red-500 text-sm">{error}</p>)}
     </div>
   );
 }

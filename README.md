@@ -1,7 +1,7 @@
-# Nooro Task Management Application
+#  Task Management Application (Frontend)
 
 ## Overview
-Nooro is a modern, responsive task management web application built with Next.js and Tailwind CSS. It provides an intuitive interface for creating, editing, and managing tasks.
+This is a modern, responsive task management web application built with Next.js and Tailwind CSS. It provides an intuitive interface for creating, editing, and managing tasks.
 
 ## Features
 - Create new tasks
@@ -11,16 +11,16 @@ Nooro is a modern, responsive task management web application built with Next.js
 - Built with Next.js 14 and TypeScript
 
 ## Prerequisites
-- Node.js (v18 or later)
-- npm (v9 or later)
+- Node.js (v20 or later)
+- npm (v9.6.4 or later)
 - Docker (optional, for containerized deployment)
 
 ## Local Development Setup
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/nooro-task-management.git
-cd nooro-task-management
+https://github.com/otim-otim/task-management-FE.git
+cd task-management-FE
 ```
 
 ### 2. Install Dependencies
@@ -38,12 +38,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Build Docker Image
 ```bash
-docker build -t nooro-frontend .
+docker build -t task-management-fe .
 ```
 
 ### Run Docker Container
 ```bash
-docker run -p 3000:3000 nooro-frontend
+docker run -p 3000:3000 task-management-fe
 ```
 
 ## Project Structure
@@ -65,5 +65,3 @@ docker run -p 3000:3000 nooro-frontend
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
-Distributed under the MIT License.

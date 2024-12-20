@@ -7,7 +7,7 @@ export default function Home() {
       <main className="w-full max-w-[736px] flex flex-col gap-8 items-start">
         <Link
           href="/create"
-          className="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm text-white focus:relative bg-blue-500 w-full"
+          className="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm text-white focus:relative bg-[#1E6F9F] w-full"
         >
           Create Task
           <svg

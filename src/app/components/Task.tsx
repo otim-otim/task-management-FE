@@ -105,7 +105,8 @@ export default function Task({ task }: { task?: ITask }) {
       {renderColorRadioGroup()}
       <button
         onClick={handleTaskCreateUpdate}
-        className="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm text-white focus:relative bg-blue-500 w-full mt-4"
+        className="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm text-white focus:relative bg-[#1E6F9F]
+ w-full mt-4"
       >
         {task ? "save" : "Add Task"}
         {!task && (

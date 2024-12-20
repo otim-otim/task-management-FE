@@ -11,8 +11,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Task({ task }: { task?: ITask }) {
-  const [title, setTitle] = useState<string >(task?.title ?? '');
-  const [selectedColor, setSelectedColor] = useState<TaskColor>(task?.color ?? "gray");
+  const [title, setTitle] = useState<string>(task?.title ?? "");
+  const [selectedColor, setSelectedColor] = useState<TaskColor>(
+    task?.color ?? "gray"
+  );
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const COLOR_CLASSES: Record<TaskColor, string> = {
@@ -28,9 +30,9 @@ export default function Task({ task }: { task?: ITask }) {
   async function handleTaskCreateUpdate() {
     if (title) {
       if (task) {
-        if(title === task.title && selectedColor === task.color){
-            setError("No changes made")
-            return
+        if (title === task.title && selectedColor === task.color) {
+          setError("No changes made");
+          return;
         }
         const taskUpdateRequest: ITaskUpdateRequest = {
           title,
@@ -45,9 +47,9 @@ export default function Task({ task }: { task?: ITask }) {
         await createTask(taskCreateRequest);
       }
       router.push("/");
-    }else{
-        setError("add a title to your task")
-        return;
+    } else {
+      setError("add a title to your task");
+      return;
     }
   }
   const renderColorRadioGroup = () => {
@@ -91,15 +93,15 @@ export default function Task({ task }: { task?: ITask }) {
   return (
     <div className="max-w-md mx-auto py-6 " style={taskStyle}>
       <div className="w-full h-[81px] items-center mb-2 ">
-      <label className="block text-sm font-medium text-blue-500">Title</label>
+        <label className="block text-sm font-medium text-blue-500">Title</label>
         &#8203;
         <input
-  type="text"
-  className="w-full bg-gray-500 rounded text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-  value={title}
-  placeholder="finish project"
-  onChange={(e) => setTitle(e.target.value)}
-/>
+          type="text"
+          className="w-full bg-gray-500 rounded text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+          value={title}
+          placeholder="finish project"
+          onChange={(e) => setTitle(e.target.value)}
+        />
       </div>
       <label className="block text-sm font-medium text-blue-500">Color</label>
       {renderColorRadioGroup()}
@@ -109,7 +111,7 @@ export default function Task({ task }: { task?: ITask }) {
  w-full mt-4"
       >
         {task ? "save" : "Add Task"}
-        {!task && (
+        {!task ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -126,9 +128,24 @@ export default function Task({ task }: { task?: ITask }) {
             <path d="M8 12h8" />
             <path d="M12 8v8" />
           </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-check"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
         )}
       </button>
-      {error && (<p className="text-red-500 text-sm">{error}</p>)}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
 }

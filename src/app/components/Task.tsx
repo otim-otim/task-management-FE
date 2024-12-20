@@ -1,14 +1,19 @@
 "use client";
 
 import { createTask, updateTask } from "@/services/tasks.service";
-import { ITask, ITaskCreateResquest, ITaskUpdateRequest, TaskColor } from "@/types";
+import {
+  ITask,
+  ITaskCreateResquest,
+  ITaskUpdateRequest,
+  TaskColor,
+} from "@/types";
 import { useState } from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export default function Task({ task }: { task?: ITask }) {
   const [title, setTitle] = useState<string | undefined>(task?.title);
   const [selectedColor, setSelectedColor] = useState<TaskColor>("gray");
-  const router = useRouter()
+  const router = useRouter();
   const COLOR_CLASSES: Record<TaskColor, string> = {
     red: "bg-red-500 hover:bg-red-600",
     blue: "bg-blue-500 hover:bg-blue-600",
@@ -20,25 +25,23 @@ export default function Task({ task }: { task?: ITask }) {
   };
 
   async function handleTaskCreateUpdate() {
-    if(title){
-        if(task) {
-          const taskUpdateRequest: ITaskUpdateRequest = {
-            title,
-            color: selectedColor,
-          };
-          await updateTask(taskUpdateRequest, task.id);
-        }else{
-            const taskCreateRequest: ITaskCreateResquest = {
-              title,
-              color: selectedColor,
-            };
-            await createTask(taskCreateRequest);
-    
-        }
-        router.push('/')
-
+    if (title) {
+      if (task) {
+        const taskUpdateRequest: ITaskUpdateRequest = {
+          title,
+          color: selectedColor,
+        };
+        await updateTask(taskUpdateRequest, task.id);
+      } else {
+        const taskCreateRequest: ITaskCreateResquest = {
+          title,
+          color: selectedColor,
+        };
+        await createTask(taskCreateRequest);
+      }
+      router.push("/");
     }
-}
+  }
   const renderColorRadioGroup = () => {
     return (
       <div className="flex space-x-2">
@@ -68,21 +71,27 @@ export default function Task({ task }: { task?: ITask }) {
       </div>
     );
   };
-  return (
-    //     <div className="flex flex-col gap-8 row-start-2 items-center sm:items-start w-93">
-    //   <div className=" items-center cursor-pointer items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50 space-y-2">
+  const taskStyle = {
+    width: "736px",
+    height: "358px",
+    top: "291px",
+    left: "352px",
+    gap: "48px",
+    opacity: "0px",
+  };
 
-    <div className="max-w-md mx-auto py-6 bg-white ">
+  return (
+    <div className="max-w-md mx-auto py-6 " style={taskStyle}>
+      <div className="w-full h-[81px] items-center mb-2 ">
       <label className="block text-sm font-medium text-blue-500">Title</label>
-      <div className="flex items-center mb-2">
         &#8203;
         <input
-          type="text"
-          className=" bg-gray-50 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          value={title}
-          placeholder="e.g finish project"
-          onChange={(e) => setTitle(e.target.value)}
-        />
+  type="text"
+  className="w-full bg-gray-500 rounded text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+  value={title}
+  placeholder="finish project"
+  onChange={(e) => setTitle(e.target.value)}
+/>
       </div>
       <label className="block text-sm font-medium text-blue-500">Color</label>
       {renderColorRadioGroup()}
@@ -90,30 +99,26 @@ export default function Task({ task }: { task?: ITask }) {
         onClick={handleTaskCreateUpdate}
         className="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm text-white focus:relative bg-blue-500 w-full mt-4"
       >
-        { task ?'save' : 'Add Task' }
+        {task ? "save" : "Add Task"}
         {!task && (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="lucide lucide-circle-plus"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M8 12h8" />
-          <path d="M12 8v8" />
-        </svg>)}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-circle-plus"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12h8" />
+            <path d="M12 8v8" />
+          </svg>
+        )}
       </button>
-      {/* <div className="mt-4">
-        <p>Selected Color: <span className="font-bold">{selectedColor}</span></p>
-      </div> */}
     </div>
-    // </div>
-    // </div>
   );
 }

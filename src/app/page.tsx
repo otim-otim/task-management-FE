@@ -1,4 +1,4 @@
-// import Image from "next/image";
+import Link from 'next/link'
 import Tasks from "./components/Tasks";
 
 export default  function Home() {
@@ -15,24 +15,25 @@ export default  function Home() {
           priority
         /> */}
 
-        <button className="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm text-white focus:relative bg-blue-500 w-full">
+        <Link href="/create" className="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm text-white focus:relative bg-blue-500 w-full">
           Create Task
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-plus"
-          >
-            <path d="M5 12h14" />
-            <path d="M12 5v14" />
-          </svg>
-        </button>
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="lucide lucide-circle-plus"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M8 12h8" />
+          <path d="M12 8v8" />
+        </svg>
+        </Link>
 
         <Tasks />
       </main>

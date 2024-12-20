@@ -37,11 +37,45 @@ export default function Tasks() {
   }, [error]);
 
   useEffect(() => {
-    populateTasks()
+    populateTasks();
   }, [loading, tasks]);
 
-  const completedTasks = tasks.filter(task => task.completed).length;
+  const completedTasks = tasks.filter((task) => task.completed).length;
   function populateTasks() {
+    if (tasks.length === 0)
+      return (
+        <>
+          <div className="flex flex-col items-center w-full min-h-screen text-center text-gray-500 pt-20">
+            <div className="mb-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#bdbcbc"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-clipboard-list"
+              >
+                <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                <path d="M12 11h4" />
+                <path d="M12 16h4" />
+                <path d="M8 11h.01" />
+                <path d="M8 16h.01" />
+              </svg>
+            </div>
+            <h1 className="text-2xl font-bold mb-4">
+              You don't have any tasks yet
+            </h1>
+            <p className="text-gray-500">
+              Create tasks and organize your todo items
+            </p>
+          </div>
+        </>
+      );
     if (loading) {
       return (
         <div className="flex items-center justify-center h-screen">
@@ -72,15 +106,25 @@ export default function Tasks() {
       );
     }
     return tasks.map((task) => {
-      return <TaskItem task={task} key={task.id} handleTaskEdit={onTaskEdit} handleDeleteTask={onDeleteTask} />;
+      return (
+        <TaskItem
+          task={task}
+          key={task.id}
+          handleTaskEdit={onTaskEdit}
+          handleDeleteTask={onDeleteTask}
+        />
+      );
     });
   }
 
-  async function onTaskEdit(eventData : {taskId: number, updateReq : ITaskUpdateRequest}) {
+  async function onTaskEdit(eventData: {
+    taskId: number;
+    updateReq: ITaskUpdateRequest;
+  }) {
     try {
-        const { taskId, updateReq } = eventData
-        const { data }  = await updateTask(updateReq, taskId);
-        const { task }  = data
+      const { taskId, updateReq } = eventData;
+      const { data } = await updateTask(updateReq, taskId);
+      const { task } = data;
       const updatedTasks = tasks.map((taskItem) => {
         if (taskItem.id === task.id) {
           return { ...taskItem, ...task };
@@ -89,33 +133,40 @@ export default function Tasks() {
       });
       setTasks(updatedTasks);
     } catch (error) {
-        if (error instanceof Error) {
-            setError(error.message);
-          } else {
-            setError("An unknown error occurred");
-          }
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   }
 
   async function onDeleteTask(taskId: number) {
     try {
-        
-        await deleteTask( taskId);
-        const updatedTasks = tasks.filter((taskItem) => taskItem.id !== taskId);
-        setTasks(updatedTasks);
+      await deleteTask(taskId);
+      const updatedTasks = tasks.filter((taskItem) => taskItem.id !== taskId);
+      setTasks(updatedTasks);
     } catch (error) {
-        if (error instanceof Error) {
-            setError(error.message);
-          } else {
-            setError("An unknown error occurred");
-          }
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   }
 
+  const taskStyle = {
+    width: "736px",
+    height: "358px",
+    top: "291px",
+    left: "352px",
+    gap: "48px",
+    opacity: "0px",
+  };
 
   return (
-    <div className="space-y-2">
-      <div className="flex items-center mb-3">
+    <div className="space-y-2" style={taskStyle}>
+      <div className="flex items-center mb-3 w-full">
         <div>
           <span className="text-sm font-bold mr-2">Tasks</span>
           <span className="whitespace-nowrap rounded-full bg-[#262626] px-2.5 py-0.5 text-sm text-white">
@@ -125,7 +176,7 @@ export default function Tasks() {
         <div className="ml-auto mr-0">
           <span className="text-sm font-bold mr-2">Completed</span>
           <span className="whitespace-nowrap rounded-full bg-[#262626] px-2.5 py-0.5 text-sm text-white">
-          {completedTasks} of {tasks.length}
+            {completedTasks} of {tasks.length}
           </span>
         </div>
       </div>

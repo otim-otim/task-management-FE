@@ -118,14 +118,14 @@ export default function Tasks() {
     <div className="space-y-2">
       <div className="flex items-center mb-3">
         <div>
-          <span className="text-sm font-bold">Tasks</span>
-          <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700">
+          <span className="text-sm font-bold mr-2">Tasks</span>
+          <span className="whitespace-nowrap rounded-full bg-[#262626] px-2.5 py-0.5 text-sm text-white">
             {tasks.length}
           </span>
         </div>
         <div className="ml-auto mr-0">
-          <span className="text-sm font-bold">Completed</span>
-          <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700">
+          <span className="text-sm font-bold mr-2">Completed</span>
+          <span className="whitespace-nowrap rounded-full bg-[#262626] px-2.5 py-0.5 text-sm text-white">
           {completedTasks} of {tasks.length}
           </span>
         </div>

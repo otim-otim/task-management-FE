@@ -3,18 +3,21 @@ import Tasks from "./components/Tasks";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center min-h-screen p-0 sm:p-20 pb-20 gap-8 font-[family-name:var(--font-geist-sans)]">
-      <main className="w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-[736px] flex flex-col gap-4 sm:gap-8 items-center sm:items-start relative">
-        <Link href="/create" className="w-full">
-          <div className="bg-[#1E6F9F] rounded-lg p-3 sm:p-4 w-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-300">
+    <div
+      className="flex flex-col items-center min-h-screen p-0 sm:p-20 pb-20 gap-8 font-[family-name:var(--font-geist-sans)] relative"
+      style={{ marginTop: "-100px" }}
+    >
+      <div className="w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-[736px] flex flex-col items-center sm:items-start relative">
+        <Link href="/create" className="w-full z-10">
+          <div className="bg-[#1E6F9F] rounded-lg p-1 sm:p-2 w-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-300">
             <div className="flex items-center space-x-2 text-white">
               <span className="text-sm sm:text-base text-center">
                 Create New Task
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -30,8 +33,10 @@ export default function Home() {
             </div>
           </div>
         </Link>
-        <Tasks />
-      </main>
+        <div className="w-full mt-8 sm:mt-10">
+          <Tasks />
+        </div>
+      </div>
     </div>
   );
 }

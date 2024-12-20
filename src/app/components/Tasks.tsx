@@ -112,7 +112,6 @@ export default function Tasks() {
     }
   }
 
-//   function handleTaskEdit(0)
 
   return (
     <div className="space-y-2">

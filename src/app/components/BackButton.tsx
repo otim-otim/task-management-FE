@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-export default function BackButton() {
+export default function BackButton({ className, ...props }: React.HTMLAttributes<HTMLButtonElement>) {
   const router = useRouter();
 
   const goBack = () => {
@@ -12,7 +12,8 @@ export default function BackButton() {
   return (
     <button 
       onClick={goBack}
-      className="flex items-center gap-2 text-gray-500 hover:text-gray-700"
+      className={`flex items-center gap-2 text-gray-500 hover:text-gray-700 ${className}`}
+      {...props}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

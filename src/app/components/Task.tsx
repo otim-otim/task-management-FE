@@ -9,6 +9,7 @@ import {
 } from "@/types";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import BackButton from "../components/BackButton";
 
 export default function Task({ task }: { task?: ITask }) {
   const [title, setTitle] = useState<string>(task?.title ?? "");
@@ -92,6 +93,7 @@ export default function Task({ task }: { task?: ITask }) {
 
   return (
     <div className="max-w-md mx-auto py-6 " style={taskStyle}>
+        <BackButton className="mb-5"/>
       <div className="w-full h-[81px] items-center mb-2 ">
         <label className="block text-sm font-medium text-blue-500">Title</label>
         &#8203;

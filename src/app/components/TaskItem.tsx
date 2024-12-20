@@ -16,7 +16,9 @@ export default function TaskItem({
   }) => void;
   handleDeleteTask: (taskId: number) => void;
 }) {
+
   const router = useRouter();
+  
   function printTasktitle() {
     if (task.title.length > 100) {
       return task.title.substring(0, 100) + "...";

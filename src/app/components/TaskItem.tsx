@@ -1,9 +1,12 @@
 "use client";
 
 import { ITask, ITaskUpdateRequest } from "@/types";
+import { useRouter } from 'next/navigation'
+import { MouseEvent } from "react";
 
 export default function TaskItem({ task, handleTaskEdit, handleDeleteTask }: { task: ITask, handleTaskEdit: (eventData: { taskId: number, updateReq: ITaskUpdateRequest }) => void, handleDeleteTask: (taskId: number) => void }) {
 
+    const router = useRouter()
     function printTasktitle() {
         if (task.title.length > 20) {
             return task.title.substring(0, 20) + '...'
@@ -12,19 +15,33 @@ export default function TaskItem({ task, handleTaskEdit, handleDeleteTask }: { t
         }
     }
 
-    function handleTaskCompletion(e) {
-        const isCompleted = e.target.checked
+    function handleTaskCompletion(e: MouseEvent) {
+        e.preventDefault(); 
+        e.stopPropagation();
+        const isCompleted = (e.target as HTMLInputElement).checked
         handleTaskEdit({
             taskId: task.id,
             updateReq: { completed: isCompleted }
         })
-        console.log('Task completed', e.target.checked)
+        console.log('Task completed', (e.target as HTMLInputElement).checked)
     }
 
-    function onDeleteTask() {
+    function onDeleteTask(e : MouseEvent) {
+        e.preventDefault(); 
+        e.stopPropagation();
         handleDeleteTask(task.id)
     }
+    function handleTaskNavigation(e: MouseEvent) {
+        // Only navigate if the click is not on the checkbox or delete button
+        const target = e.target as HTMLElement;
+        if (!target.closest('input[type="checkbox"]') && !target.closest('button')) {
+            router.push(`/tasks/${task.id}`);
+        }
+    }
   return (
+    <div onClick={handleTaskNavigation} className="cursor-pointer">
+
+    
     <label
       //   for="Option1"
       className="flex cursor-pointer items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50 has-[:checked]:bg-blue-50"
@@ -71,5 +88,6 @@ export default function TaskItem({ task, handleTaskEdit, handleDeleteTask }: { t
         </button>
       </div>
     </label>
+    </div>
   );
 }

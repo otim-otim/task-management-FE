@@ -11,8 +11,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Task({ task }: { task?: ITask }) {
-  const [title, setTitle] = useState<string | undefined>(task?.title);
-  const [selectedColor, setSelectedColor] = useState<TaskColor>("gray");
+  const [title, setTitle] = useState<string >(task?.title ?? '');
+  const [selectedColor, setSelectedColor] = useState<TaskColor>(task?.color ?? "gray");
   const router = useRouter();
   const COLOR_CLASSES: Record<TaskColor, string> = {
     red: "bg-red-500 hover:bg-red-600",

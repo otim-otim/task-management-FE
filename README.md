@@ -19,7 +19,7 @@ This is a modern, responsive task management web application built with Next.js 
 
 ### 1. Clone the Repository
 ```bash
-https://github.com/otim-otim/task-management-FE.git
+git clone https://github.com/otim-otim/task-management-FE.git
 cd task-management-FE
 ```
 
